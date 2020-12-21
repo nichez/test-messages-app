@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Message from "./Message";
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+
+  const toggleLogin = () => {
+    setIsAuth((prevState) => !prevState);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <button type="button" className="btnLogin" onClick={toggleLogin}>
+        {!isAuth ? "Login" : "Logout"}
+      </button>
+      {isAuth && (
+        <div className="messageContainer">
+          <Message
+            title="Message Nikola"
+            description="This is random message one."
+            user="User Nikola"
+          />
+          <Message
+            title="Message Two"
+            description="This is test message two."
+            user="User Two"
+          />
+        </div>
+      )}
     </div>
   );
 }
